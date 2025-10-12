@@ -19,9 +19,7 @@ import matplotlib.animation as animation
 
 from quadrotor import QuadrotorData, QuadRotor12D, State
 import util
-from util import chronological_projection, smooth_path_timeparam_xyz
-from geometric_controller import closed_loop_geometric_control
-
+from util import chronological_projection
 
 print("Default backend:", jax.default_backend())
 

@@ -1,9 +1,12 @@
 import jax.numpy as jnp
 import numpy as np
-from drax.systems.quadrotor import QuadrotorOCP
 import matplotlib.pyplot as plt
 
-prob = QuadrotorOCP(horizon=50, x_init=jnp.zeros(12))
+from quadrotor import QuadRotor12D, QuadrotorData, quadrotor_dynamics
+
+# prob = QuadrotorOCP(horizon=50, x_init=jnp.zeros(12))
+
+prob = QuadrotorData()
 
 
 class DirtyDerivative:
@@ -257,7 +260,7 @@ def closed_loop_geometric_control(x_traj, goal_pos_abs, trajectory_derivatives=N
         control_sim = control_sim.at[i, :].set(u_current)
 
         # Step the plant
-        x_next = prob.dynamics(state_sim[i], control_sim[i])
+        x_next = quadrotor_dynamics(state_sim[i], control_sim[i])
 
         # Safety clamp
         if float(x_next[2]) < 0.05:
@@ -561,7 +564,7 @@ def closed_loop_geometric_control(x_traj, goal_pos_abs, trajectory_derivatives=N
 #         control_sim = control_sim.at[i,:].set(u_current)
         
 #         # Simulate one step forward using the quadrotor dynamics
-#         x_next = prob.dynamics(state_sim[i], control_sim[i])
+#         x_next = quadrotor_dynamics(state_sim[i], control_sim[i])
         
 #         # Safety check - prevent negative height values
 #         if x_next[2] < 0.05:  # If height is too low
