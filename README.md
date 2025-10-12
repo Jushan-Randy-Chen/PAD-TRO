@@ -9,6 +9,7 @@ Recent diffusion-based trajectory optimization frameworks rely on a single-shoot
 ## Install dependencies
 To install dependencies: 
 `pip install -e . `
+### Warning: you need a JAX compatible GPU!!
 
 ## Open-loop trajectory generation
 To generate trajectories using our algorithm, run `python3 state_diffusion_chronological_projection`
